@@ -1,0 +1,19 @@
+{{#items}}
+<div class="timeline-item">
+    <div class="row">
+        <div class="col-xs-3 date">
+            <i class="fa fa-newspaper-o"></i>
+            {{ date }}
+            <!--<br><small class="text-navy">2 hour ago</small>-->
+        </div>
+        <div class="col-xs-7 content no-top-border">
+            <p class="m-b-xs"><strong>{{ title }}</strong></p>
+            <p>
+                {{ desc }}
+                <a href="{{ link }}" class="text-navy" target="_blank">weiter</a>
+            </p>
+
+        </div>
+    </div>
+</div>
+{{/items}}

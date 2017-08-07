@@ -1,0 +1,53 @@
+{
+  "name": "soc2",
+  "version": "1.0.0",
+  "description": "Schwule Ochsen Cup Website",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@symfony/webpack-encore": "^0.12.0",
+    "animate.css": "^3.5.2",
+    "axios": "^0.16.2",
+    "bootstrap": "^3.3.7",
+    "chart.js": "^2.6.0",
+    "font-awesome": "^4.7.0",
+    "footable": "^2.0.5",
+    "jquery": "^3.2.1",
+    "jquery-slimscroll": "^1.3.8",
+    "metismenu": "^2.7.0",
+    "moment": "^2.18.1",
+    "mustache": "^2.3.0",
+    "node-sass": "^4.5.3",
+    "nprogress": "^0.2.0",
+    "sass-loader": "^6.0.6",
+    "sweetalert2": "^6.6.6",
+    "toastr": "^2.1.2",
+    "underscore": "^1.8.3"
+  },
+  "scripts": {
+    "dev-server": "./node_modules/.bin/encore dev-server",
+    "dev": "./node_modules/.bin/encore dev",
+    "watch": "./node_modules/.bin/encore dev --watch",
+    "build": "./node_modules/.bin/encore production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/watermusic/soc2.git"
+  },
+  "keywords": [
+    "php7",
+    "symfony3",
+    "vue",
+    "rest",
+    "sonata"
+  ],
+  "author": "Lutz Bicker",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/watermusic/soc2/issues"
+  },
+  "homepage": "https://github.com/watermusic/soc2#readme"
+}

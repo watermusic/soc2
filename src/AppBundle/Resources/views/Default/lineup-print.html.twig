@@ -1,0 +1,156 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <style>
+
+        body {
+            background-color: #ffffff;
+        }
+
+        .player {
+            padding: 0;
+        }
+
+        .player .item .username {
+            margin-left: 50%;
+        }
+
+        .player .item {
+            width: 33%;
+            float: left;
+            padding: 0 50px 0 0;
+        }
+
+        .player .result {
+            margin-top: 11%;
+        }
+
+        .table-header-rotated th.row-header{
+            width: auto;
+        }
+
+        .player .item th {
+            vertical-align: bottom;
+        }
+
+        .player .item .player-name {
+            width: 25%;
+            text-align: left;
+        }
+
+        .table-header-rotated td{
+            width: 40px;
+            border-top: 1px solid #dddddd;
+            border-left: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
+            vertical-align: middle;
+            text-align: center;
+        }
+
+        .table-header-rotated th.rotate-45{
+            height: 80px;
+            width: 40px;
+            min-width: 40px;
+            max-width: 40px;
+            position: relative;
+            vertical-align: bottom;
+            padding: 0;
+            font-size: 12px;
+            line-height: 0.8;
+        }
+
+        .table-header-rotated th.rotate-45 > div{
+            position: relative;
+            top: 0px;
+            left: 40px; /* 80 * tan(45) / 2 = 40 where 80 is the height on the cell and 45 is the transform angle*/
+            height: 100%;
+            -ms-transform:skew(-45deg,0deg);
+            -moz-transform:skew(-45deg,0deg);
+            -webkit-transform:skew(-45deg,0deg);
+            -o-transform:skew(-45deg,0deg);
+            transform:skew(-45deg,0deg);
+            overflow: hidden;
+            border-left: 1px solid #dddddd;
+            border-right: 1px solid #dddddd;
+            border-top: 1px solid #dddddd;
+        }
+
+        .table-header-rotated th.rotate-45 span {
+            -ms-transform:skew(45deg,0deg) rotate(315deg);
+            -moz-transform:skew(45deg,0deg) rotate(315deg);
+            -webkit-transform:skew(45deg,0deg) rotate(315deg);
+            -o-transform:skew(45deg,0deg) rotate(315deg);
+            transform:skew(45deg,0deg) rotate(315deg);
+            position: absolute;
+            bottom: 30px; /* 40 cos(45) = 28 with an additional 2px margin*/
+            left: -25px; /*Because it looked good, but there is probably a mathematical link here as well*/
+            display: inline-block;
+        // width: 100%;
+            width: 85px; /* 80 / cos(45) - 40 cos (45) = 85 where 80 is the height of the cell, 40 the width of the cell and 45 the transform angle*/
+            text-align: left;
+        // white-space: nowrap; /*whether to display in one line or not*/
+        }
+
+
+        .table-header-rotated tfoot td {
+            border-bottom: 1px solid #dddddd;
+            text-align: left;
+            font-size: 10px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+
+        <div class="wrapper">
+    {% block content_main %}
+
+            <h2>13. Spieltag</h2>
+
+            <div class="row">
+
+                <div class="col-lg-12">
+
+                    <ul class="unstyled player">
+
+                        {% for username, lineup in lineups %}
+
+                        <li class="item">
+                            {% include 'AppBundle:Default/Lineup:lineup-print-table.html.twig' %}
+                        </li>
+
+                        {% endfor %}
+
+                        <li class="item">
+                            {% include 'AppBundle:Default/Lineup:lineup-print-result.html.twig' %}
+                        </li>
+
+                    </ul>
+
+
+                </div>
+
+            </div>
+
+    {% endblock %}
+
+        </div>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('build/dashboard.js') }}"></script>
+
+{% endblock %}

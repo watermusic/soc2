@@ -1,0 +1,28 @@
+{% extends 'AppBundle:Player:index.html.twig' %}
+
+{% block content_main %}
+
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Spieler hinzufügen</h5>
+                </div>
+                <div class="ibox-content">
+
+                    {{ form(form) }}
+                    <ul class="record_actions list-unstyled">
+                        <li>
+                            <a class="btn btn-primary btn-xs" href="{{ path('soc_player_index') }}">
+                                Zurück zur Liste
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

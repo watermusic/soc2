@@ -1,0 +1,94 @@
+{% extends 'AppBundle:Default:index.html.twig' %}
+
+{% block content_header %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Versteigerung</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('soc_dashboard_index') }}">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Versteigerung</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content_main %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Versteigerung</h5>
+                    <div class="ibox-tools">
+                        <a class="add-link" href="{{ path('soc_player_new') }}">
+                            <i class="fa fa-plus-square"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Verein</th>
+                            <th>Position</th>
+                            <th>Wert</th>
+                            <th>Verkaufspreis</th>
+                            <th>Käufer</th>
+                            <th>Note</th>
+                            <th>Punkte</th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for entity in entities %}
+                            <tr>
+                                <td><a class="btn btn-outline btn-default btn-xs"
+                                       href="{{ path('soc_player_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+                                <td>{{ entity.name }}</td>
+                                <td>{{ entity.team.name }}</td>
+                                <td>{{ entity.position.name }}</td>
+                                <td>{{ entity.vkPreis|number_format(2, ',', '.') }}</td>
+                                <td>{{ entity.ekPreis|number_format(2, ',', '.') }}</td>
+                                <td>{{ '' }}</td>
+                                <td>{{ entity.note }}</td>
+                                <td>{{ entity.punkte }}</td>
+                                <td>
+                                    <a href="{{ path('soc_player_show', { 'id': entity.id }) }}" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-folder"></i> show</a>
+                                    <a href="{{ path('soc_player_edit', { 'id': entity.id }) }}" class="btn btn-outline btn-primary btn-xs"><i class="fa fa-pencil"></i> edit</a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Verein</th>
+                            <th>Position</th>
+                            <th>Wert</th>
+                            <th>Verkaufspreis</th>
+                            <th>Käufer</th>
+                            <th>Note</th>
+                            <th>Punkte</th>
+                            <th></th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

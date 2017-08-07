@@ -1,0 +1,35 @@
+soc_player_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Player:index" }
+
+soc_player_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Player:show" }
+
+soc_player_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Player:new" }
+
+soc_player_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Player:create" }
+    requirements: { methods: post }
+
+soc_player_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Player:edit" }
+
+soc_player_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Player:update" }
+    requirements: { methods: post|put }
+
+soc_player_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Player:delete" }
+    requirements: { methods: post|delete }
+
+soc_player_search:
+    path:     /search
+    defaults: { _controller: "AppBundle:Player:search" }
+

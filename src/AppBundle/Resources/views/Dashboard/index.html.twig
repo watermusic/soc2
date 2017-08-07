@@ -1,0 +1,119 @@
+{% extends 'AppBundle:Default:index.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('build/global.css') }}">
+{% endblock %}
+
+{% block content_header %}
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-lg-10">
+            <h2>Dashboard</h2>
+            <ol class="breadcrumb">
+                <li>
+                    <a href="{{ path('soc_dashboard_index') }}">Home</a>
+                </li>
+                <li class="active">
+                    <strong>Dashboard</strong>
+                </li>
+            </ol>
+        </div>
+        <div class="col-lg-2">
+
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content_main %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Tabelle</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Punkte</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for name, standing in standings %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ name }}</td>
+                                <td>{{ standing }}</td>
+                            </tr>
+                        {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Punkte pro Spieltag</h5>
+                </div>
+                <div class="ibox-content">
+                    <canvas id="pptMatchday" width="400" height="280"></canvas>
+                </div>
+            </div>
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Saisonverlauf</h5>
+                </div>
+                <div class="ibox-content">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Bundesliga News</h5>
+
+                    <div class="ibox-tools">
+                        <a id="news-refresh">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ibox-content inspinia-timeline" id="news-timeline">
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+        </div>
+    </div>
+{% endblock %}
+
+    {% block content_footer %}
+        {{ parent() }}
+        <div id="config"
+             data-user="{{ user ? user|serialize|e('html_attr') : '' }}"
+             data-chart-data="{{ ppd.data|raw|e('html_attr') }}"
+             data-matchdays="{{ ppd.labels|raw|e('html_attr') }}"
+        ></div>
+    {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('build/dashboard.js') }}"></script>
+
+    <script id="news-timeline-item" type="x-tmpl-mustache">
+    {{ news.template|raw }}
+    </script>
+
+{% endblock %}

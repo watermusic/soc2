@@ -1,0 +1,219 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <style>
+
+        .field {
+            height: 800px;
+            padding: 3%;
+            background-color: #1ab394;
+            position: relative;
+        }
+
+        .bench {
+
+        }
+
+        .bench ul {
+            padding: 0;
+        }
+
+        .bench .tools {
+            float: right;
+        }
+
+        .bench-item {
+            float: left;
+        }
+
+        .bench-item > .pi, .field > .pi {
+            width: 123px;
+            margin: 0 7px 12px 0;
+        }
+
+        .bench-item .ibox-content, .field .ibox-content {
+            padding: 0;
+        }
+
+        .bench-item .pi .player-desc, .field .pi .player-desc {
+            padding: 7px;
+        }
+
+        .bench-item .btn-xs, .btn-group-xs > .btn {
+            font-size: 9px;
+        }
+
+        #nprogress .bar {
+            height: 60px;
+        }
+
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="wrapper" data-user="{{ user ? user|serialize|e('html_attr') : '' }}">
+
+    {% include 'AppBundle:Default:navigation-main.html.twig' %}
+
+    <div id="page-wrapper" class="gray-bg">
+
+    {% include 'AppBundle:Default:navigation-minor.html.twig' %}
+
+    {% block content_header %}
+
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-lg-10">
+                <h2>Dashboard</h2>
+                <ol class="breadcrumb">
+                    <li>
+                        <a href="{{ path('soc_dashboard_index') }}">Home</a>
+                    </li>
+                    <li class="active">
+                        <strong>Aufstellung</strong>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+
+    {% endblock %}
+
+    {% block content_main %}
+        <div class="row wrapper wrapper-content animated fadeInRight">
+            <div class="col-lg-7">
+                <div class="field">
+                </div>
+            </div>
+            <div class="col-lg-5">
+
+                <div class="ibox bench">
+                    <div class="ibox-title">
+                        <h5>Aufstellung</h5>
+                        <div class="ibox-tools">
+                            <a class="collapse-link">
+                                <i class="fa fa-chevron-up"></i>
+                            </a>
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                <i class="fa fa-wrench"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-user">
+                                <li><a href="#">Config option 1</a>
+                                </li>
+                                <li><a href="#">Config option 2</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ibox-content">
+                        <div class="row m-t-sm">
+                            <div class="col-lg-12">
+                                <label for="ddMatchday">Spieltag</label>
+                                <form class="form-inline m-b">
+                                    <div class="form-group">
+                                        <select class="form-control" id="ddMatchday" name="matchday">
+                                            {% for i in range(1, 34) %}
+                                                <option value="{{ i }}">{{ i }}. Spieltag</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group tools">
+                                        <button class="btn btn-primary btn-save" type="button"><i class="fa fa-save"></i> Speichern</button>
+                                        <button class="btn btn-outline btn-default btn-print" type="button"><i class="fa fa-print"></i></button>
+                                        <button class="btn btn-outline btn-warning btn-reset" type="button"><i class="fa fa-repeat"></i></button>
+                                    </div>
+                                </form>
+                                <label>Auswechselbank</label>
+                                <ul class="nav nav-tabs">
+
+                                    {% for posName, players in positionenGroup %}
+
+                                    <li class="{{ loop.index == 1 ? 'active' : '' }}"><a href="#tab-{{ loop.index }}" data-toggle="tab">{{ posName }}</a></li>
+
+                                    {% endfor %}
+                                </ul>
+
+                                <div class="tab-content">
+
+                                            {% for posName, players in positionenGroup %}
+
+                                            <div class="tab-pane{{ loop.index == 1 ? ' active' : '' }}" id="tab-{{ loop.index }}">
+
+                                                <ul class="unstyled">
+                                                    {% for player in players %}
+
+                                                        <li class="bench-item">
+
+                                                            <div class="ibox pi" data-ref="{{ player.id }}" data-value="{{ player|serialize }}">
+                                                                <div class="ibox-content">
+
+                                                                    <div class="player-imitation {{ player.team.name|lower }}">
+                                                                        <img class="img-circle portrait" src="{{ player.thumbUrl}}">
+                                                                    </div>
+                                                                    <div class="player-desc">
+                                                                        <small class="text-muted">{{ player.team}}</small>
+                                                                        <a href="#" class="player-name">{{ player.name}}</a>
+                                                                        <div class="small m-t-xs exchange">
+                                                                            {% for position in positionen %}
+                                                                                <a href="javascript:void(0);" class="btn btn-xs btn-{{ position.colorName }} btn-outline" data-position="{{ position.name }}">{{ position.shortcut }}</a>
+                                                                            {% endfor %}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </li>
+
+                                                    {% endfor %}
+
+                                                </ul>
+                                            </div>
+
+                                            {% endfor %}
+
+                                        </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}
+
+    {% block content_footer %}
+        <div class="footer">
+            <div class="pull-right">
+                Yeah <strong>iii</strong>.
+            </div>
+            <div>
+                <strong>Copyright</strong> S.O.C. &copy; 2014-2015
+            </div>
+        </div>
+        <div id="config" data-user="{{ user ? user|serialize|e('html_attr') : '' }}"></div>
+    {% endblock %}
+
+    </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+
+    <script src="{{ asset('build/lineup.js') }}"></script>
+
+    <script id="lineup-item" type="x-tmpl-mustache">
+    {{ template|raw }}
+    </script>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+soc_dashboard_index:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+
+soc_dashboard_news:
+    path:     /dashboard/news
+    defaults: { _controller: AppBundle:Default:news }
+
+soc_lineup_index:
+    path:     /lineup
+    defaults: { _controller: AppBundle:Default:lineup }
+
+soc_lineup_print:
+    path:     /lineup/{matchday}/print.{_format}
+    defaults: { _controller: AppBundle:Default:lineupPrint, _format: pdf }
+    requirements:
+        _format: pdf
+
+soc_team_index:
+    path:     /team
+    defaults: { _controller: AppBundle:Default:team }
+
+#soc_lineup_test:
+#    path:     /test.{_format}
+#    defaults: { _controller: AppBundle:Default:test, _format: html }
+#    requirements:
+#        _format: html|pdf
+#
+soc_standings_index:
+    path:     /standings
+    defaults: { _controller: AppBundle:Default:index }
+
+soc_score_index:
+    path:     /score
+    defaults: { _controller: AppBundle:Default:score }
+
+soc_matchday_index:
+    path:     /matchday
+    defaults: { _controller: AppBundle:Default:index }
+
+soc_player:
+    resource: "@AppBundle/Resources/config/routing/player.yml"
+    prefix:   /player
+
+
+
+
+

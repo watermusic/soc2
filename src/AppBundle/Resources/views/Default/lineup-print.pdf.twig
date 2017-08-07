@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pdf SYSTEM "%resources%/dtd/doctype.dtd">
+
+<pdf>
+
+    <page page-size="a4 landscape" font-type="helvetica">
+
+        <div>
+
+            {% for username, lineup in lineups %}
+            <div class="item">
+                {% include 'AppBundle:Default/Lineup:lineup-print-table.pdf.twig' %}
+            </div>
+            {% endfor %}
+
+            <div class="item">
+                {% include 'AppBundle:Default/Lineup:lineup-print-result.pdf.twig' %}
+            </div>
+
+        </div>
+
+    </page>
+</pdf>

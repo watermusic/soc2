@@ -1,0 +1,87 @@
+{% extends 'AppBundle:Player:index.html.twig' %}
+
+{% block content_main %}
+    <div class="row wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Spielerdetails</h5>
+                </div>
+                <div class="ibox-content">
+
+                    <form method="get" class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">#</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.id }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Name:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.name }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Verein:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.verein }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Position:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.position }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Verkaufspreis:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.vkPreis|number_format(2, ',', '.') }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Einkaufspreis:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.ekPreis|number_format(2, ',', '.') }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Käufer:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.kaeufer }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Note:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.note }}" disabled>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-3 control-label">Punkte:</label>
+                            <div class="col-lg-9">
+                                <input type="text" class="form-control" value="{{ entity.punkte }}" disabled>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-lg-9 col-sm-offset-2">
+                                <a class="btn btn-primary btn-xs" href="{{ path('soc_player_index') }}">
+                                    Zurück zur Liste
+                                </a>
+                                <a class="btn btn-default btn-xs" href="{{ path('soc_player_edit', { 'id': entity.id }) }}">
+                                    bearbeiten
+                                </a>
+                                {{ form(delete_form) }}
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}
+

@@ -1,0 +1,92 @@
+<div class="row">
+    <div class="large-12 columns">
+
+        <nav class="top-bar" data-topbar role="navigation">
+            <ul class="title-area">
+                <li class="name">
+                    <h1><a href="#">My Site</a></h1>
+                </li>
+                <!-- Remove the class "menu-icon" to get rid of menu icon. Take out "Menu" to just have icon alone -->
+                <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+            </ul>
+
+            <section class="top-bar-section">
+                <!-- Right Nav Section -->
+                <ul class="right">
+                    <li class="active"><a href="#">Right Button Active</a></li>
+                    <li class="has-form">
+                        <div class="row collapse">
+                            <div class="large-8 small-9 columns">
+                                <input type="text" placeholder="Find Stuff">
+                            </div>
+                            <div class="large-4 small-3 columns">
+                                <a href="#" class="alert button expand">Search</a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Left Nav Section -->
+{#                <ul class="left">
+                    <li><a href="#">Left Nav Button</a></li>
+                </ul>#}
+            </section>
+        </nav>
+
+    </div>
+
+</div>
+
+
+
+{#
+<!-- Fixed navbar -->
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="javascript:clearFrm();">S.O.C. - 2014/15</a>
+            </div>
+            <div class="navbar-collapse collapse">
+
+                <form class="navbar-form navbar-right" role="form" method="get" id="frmSearch"
+                      action="{{ path('player') }}">
+                    <div class="form-group">
+                        <label class="control-label" for="verein">Verein</label>
+                        <select class="form-control input-sm" id="verein" name="verein">
+                            {% for name in statics.vereine %}
+                                <option value="{{ name }}" {{ (name == query.verein) ? 'selected' : '' }}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="spieler">Spieler</label>
+                        <select class="form-control input-sm" id="kaeufer" name="kaeufer">
+                            {% for name in statics.spieler %}
+                                <option value="{{ name }}" {{ (name == query.kaeufer) ? 'selected' : '' }}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="position">Position</label>
+                        <select class="form-control input-sm" id="position" name="position">
+                            {% for name in statics.positionen %}
+                                <option value="{{ name }}" {{ (name == query.position) ? 'selected' : '' }}>{{ name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Suche..." class="form-control" id="suche" name="name">
+                    </div>
+                </form>
+
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+    </div>
+</div>#}

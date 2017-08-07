@@ -1,0 +1,55 @@
+services:
+    sonata.admin.player:
+        class: AppBundle\Admin\PlayerAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Spieler" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Player
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    sonata.admin.user:
+        class: AppBundle\Admin\UserAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Teilnehmer" }
+        arguments:
+            - ~
+            - AppBundle\Entity\User
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    sonata.admin.position:
+        class: AppBundle\Admin\PositionAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Positionen" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Position
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    sonata.admin.team:
+        class: AppBundle\Admin\TeamAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Vereine" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Team
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]
+
+    sonata.admin.score:
+        class: AppBundle\Admin\ScoreAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Content", label: "Punkte" }
+        arguments:
+            - ~
+            - AppBundle\Entity\Score
+            - ~
+        calls:
+            - [ setTranslationDomain, [AppBundle]]

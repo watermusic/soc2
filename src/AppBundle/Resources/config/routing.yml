@@ -20,12 +20,6 @@ soc_team_index:
     path:     /team
     defaults: { _controller: AppBundle:Default:team }
 
-#soc_lineup_test:
-#    path:     /test.{_format}
-#    defaults: { _controller: AppBundle:Default:test, _format: html }
-#    requirements:
-#        _format: html|pdf
-#
 soc_standings_index:
     path:     /standings
     defaults: { _controller: AppBundle:Default:index }

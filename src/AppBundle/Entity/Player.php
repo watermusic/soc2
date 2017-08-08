@@ -109,22 +109,24 @@ class Player
     protected $thumbUrl = "";
 
     /**
-     * @var \DateTime $created
+     * @var \DateTime
      *
      * @Gedmo\Timestampable(on="create")
      * @ORM\Column(type="datetime")
      */
-    private $created;
+    protected $created;
 
     /**
-     * @var \DateTime $updated
+     * @var \DateTime
      *
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime")
      */
-    private $updated;
+    protected $updated;
 
-
+    /**
+     * Player constructor.
+     */
     public function __construct()
     {
         $this->created = new \DateTime();

@@ -98,7 +98,9 @@ class DefaultController extends Controller
         $teamRepository = $doctrine->getRepository('AppBundle:Team');
         $playerRepository = $doctrine->getRepository('AppBundle:Player');
         $positionenRepository = $doctrine->getRepository('AppBundle:Position');
+        $matchesRepository = $doctrine->getRepository('AppBundle:Match');
 
+        $matchDay = $matchesRepository->findNextMatchday();
         $teams = $teamRepository->findAll();
         $positionen = $positionenRepository->findAll();
 
@@ -120,6 +122,7 @@ class DefaultController extends Controller
             'user' => $user,
             'lineup' => array(),
             'teams' => $teams,
+            'matchDay' => $matchDay,
             'positionen' => $positionen,
             'positionenGroup' => $positionenGroups,
             'template' => file_get_contents(__DIR__ . '/../Resources/views/Default/lineup-item.html.mustache'),

@@ -23,29 +23,50 @@ class Team
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     /**
      * @var Collection|Player[]
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="team", cascade={"all"}, orphanRemoval=true)
      *
-     * @Serializer\Type("array<SOC\Bundle\SocBundle\Entity\Player>")
+     * @Serializer\Type("array<AppBundle\Entity\Player>")
      * @Serializer\Exclude
      */
-    private $players;
+    protected $players;
 
+    /**
+     * @var Collection|Match[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Match", mappedBy="homeTeam", cascade={"all"}, orphanRemoval=true)
+     *
+     * @Serializer\Type("array<AppBundle\Entity\Match>")
+     * @Serializer\Exclude
+     */
+    protected $homeMatches;
 
+    /**
+     * @var Collection|Match[]
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Match", mappedBy="guestTeam", cascade={"all"}, orphanRemoval=true)
+     *
+     * @Serializer\Type("array<AppBundle\Entity\Match>")
+     * @Serializer\Exclude
+     */
+    protected $guestMatches;
 
+    /**
+     * Team constructor.
+     */
     public function __construct()
     {
         $this->players = new ArrayCollection();
+        $this->homeMatches = new ArrayCollection();
+        $this->guestMatches = new ArrayCollection();
     }
 
     /**
@@ -137,6 +158,44 @@ class Team
     public function setPlayers($players)
     {
         $this->players = $players;
+    }
+
+    /**
+     * @return Match[]|Collection
+     */
+    public function getHomeMatches()
+    {
+        return $this->homeMatches;
+    }
+
+    /**
+     * @param Match[]|Collection $homeMatches
+     * @return Team
+     */
+    public function setHomeMatches($homeMatches)
+    {
+        $this->homeMatches = $homeMatches;
+
+        return $this;
+    }
+
+    /**
+     * @return Match[]|Collection
+     */
+    public function getGuestMatches()
+    {
+        return $this->guestMatches;
+    }
+
+    /**
+     * @param Match[]|Collection $guestMatches
+     * @return Team
+     */
+    public function setGuestMatches($guestMatches)
+    {
+        $this->guestMatches = $guestMatches;
+
+        return $this;
     }
 
     /**

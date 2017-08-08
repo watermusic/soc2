@@ -20,7 +20,7 @@ security:
                 provider: fos_userbundle
                 csrf_token_generator: security.csrf.token_manager
                 use_forward: true
-                default_target_path: /soc
+                default_target_path: /game
             logout:       true
             anonymous:    true
 
@@ -29,4 +29,4 @@ security:
         - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
-        - { path: ^/soc, role: ROLE_USER }
+        - { path: ^/game, role: ROLE_USER }

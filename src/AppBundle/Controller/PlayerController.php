@@ -343,6 +343,7 @@ class PlayerController extends Controller
             "suggestions" => array(),
         );
         foreach ($entities as $entity) {
+            /** @var Player[] $entity */
             array_push($result["suggestions"], $entity->getName());
         }
 

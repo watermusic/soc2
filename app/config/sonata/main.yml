@@ -1,0 +1,36 @@
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+
+sonata_admin:
+    title:      S.O.C.
+    title_logo: bundles/app/img/avatar-klopp.png
+    show_mosaic_button:   true
+    dashboard:
+        groups:
+            game:
+                label:                Spiel
+                label_catalogue:      ~
+                items:
+                    - route:        soc_dashboard_index
+                      label:        Dashboard
+                    - route:        soc_lineup_index
+                      label:        Aufstellung
+                    - route:        soc_team_index
+                      label:        Mein Team
+            auction:
+                label:                Versteigerung
+                label_catalogue:      ~
+                items:
+                    - route:        admin_app_player_list
+                      label:        Spieler
+                    - route:        admin_app_user_list
+                      label:        Ochsen
+                    - route:        admin_app_position_list
+                      label:        Position
+                    - route:        admin_app_team_list
+                      label:        Vereine
+                    - route:        admin_app_score_list
+                      label:        Punkte

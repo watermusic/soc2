@@ -39,10 +39,34 @@ class PlayerAdmin extends AbstractAdmin
     protected function configureDatagridFilters(DatagridMapper $datagridMapper)
     {
         $datagridMapper
-            ->add('name')
-            ->add('team')
-            ->add('position')
-            ->add('user')
+            ->add(
+                'name',
+                'doctrine_orm_callback',
+                [
+                    'show_filter' => true,
+                    'callback' => function ($queryBuilder, $alias, $field, $value) {
+                        if (!$value['value']) {
+                            return false;
+                        }
+
+                        $queryBuilder
+                            ->andWhere($alias . '.name LIKE :value')
+                            ->setParameter('value', '%'.$value['value'].'%')
+                        ;
+
+                        return true;
+                    },
+                ]
+            )
+            ->add('team', null, array(
+                'show_filter' => true,
+            ))
+            ->add('position', null, array(
+                'show_filter' => true,
+            ))
+            ->add('user', null, array(
+                'show_filter' => true,
+            ))
         ;
     }
 
@@ -61,30 +85,33 @@ class PlayerAdmin extends AbstractAdmin
                     'sort_parent_association_mappings' => array(array('fieldName' => 'team')),
                 )
             )
-            ->add('position')
-            ->add('punkte')
+            ->add('position', null, array('show_filter' => true) )
+            ->add('punkte', null, array('show_filter' => true) )
             ->add(
                 'user',
                 null,
                 array(
+                    'show_filter' => true,
                     'editable' => true,
                     'label' => 'Käufer'
                 )
             )
             ->add(
-                'ek_preis',
+                'ekPreis',
                 'currency',
                 array(
                     'currency' => 'EUR',
                     'label' => 'Einkaufspreis',
+                    'sortable' => true,
                 )
             )
             ->add(
-                'vk_preis',
+                'vkPreis',
                 'currency',
                 array(
                     'currency' => 'EUR',
                     'label' => 'Listenpreis',
+                    'sortable' => true,
                 )
             )
         ;

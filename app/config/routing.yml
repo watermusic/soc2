@@ -4,7 +4,7 @@ app:
 
 soc:
     resource: "@AppBundle/Resources/config/routing.yml"
-    prefix:   /soc
+    prefix:   /game
     options:
         expose: true
 

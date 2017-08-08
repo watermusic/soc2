@@ -24,10 +24,6 @@ soc_standings_index:
     path:     /standings
     defaults: { _controller: AppBundle:Default:index }
 
-soc_score_index:
-    path:     /score
-    defaults: { _controller: AppBundle:Default:score }
-
 soc_matchday_index:
     path:     /matchday
     defaults: { _controller: AppBundle:Default:index }

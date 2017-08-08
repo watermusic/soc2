@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<container xmlns="http://symfony.com/schema/dic/services" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="sonata.admin.player" class="AppBundle\Admin\PlayerAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Spieler"/>
+            <argument />
+            <argument>AppBundle\Entity\Player</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>AppBundle</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.user" class="AppBundle\Admin\UserAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Teilnehmer"/>
+            <argument />
+            <argument>AppBundle\Entity\User</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>AppBundle</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.position" class="AppBundle\Admin\PositionAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Positionen"/>
+            <argument />
+            <argument>AppBundle\Entity\Position</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>AppBundle</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.team" class="AppBundle\Admin\TeamAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Vereine"/>
+            <argument />
+            <argument>AppBundle\Entity\Team</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>AppBundle</argument>
+            </call>
+        </service>
+
+        <service id="sonata.admin.score" class="AppBundle\Admin\ScoreAdmin">
+            <tag name="sonata.admin" manager_type="orm" group="Content" label="Punkte"/>
+            <argument />
+            <argument>AppBundle\Entity\Score</argument>
+            <argument />
+            <call method="setTranslationDomain">
+                <argument>AppBundle</argument>
+            </call>
+        </service>
+
+    </services>
+</container>

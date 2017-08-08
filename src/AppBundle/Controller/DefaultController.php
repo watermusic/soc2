@@ -2,12 +2,11 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Lineup;
-use AppBundle\Entity\Team;
+use AppBundle\Entity\Player;
+use AppBundle\Entity\Score;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-//use Ps\PdfBundle\Annotation\Pdf;
 
 class DefaultController extends Controller
 {
@@ -18,11 +17,12 @@ class DefaultController extends Controller
     public function indexAction()
     {
         $scoreRepo = $this->getDoctrine()->getRepository('AppBundle:Score');
+
+        /** @var Score[] $scores */
         $scores = $scoreRepo->findAll();
 
         $standings = [];
         $ppd = [];
-        $season = [];
         $count = 0;
         foreach($scores as $score) {
             $name = ucfirst($score->getPlayer()->getUsername());
@@ -97,14 +97,12 @@ class DefaultController extends Controller
         $doctrine = $this->getDoctrine();
         $teamRepository = $doctrine->getRepository('AppBundle:Team');
         $playerRepository = $doctrine->getRepository('AppBundle:Player');
-        $lineupRepository = $doctrine->getRepository('AppBundle:Lineup');
         $positionenRepository = $doctrine->getRepository('AppBundle:Position');
 
         $teams = $teamRepository->findAll();
-        $lineups = $lineupRepository->findAll();
         $positionen = $positionenRepository->findAll();
 
-
+        /** @var Player[] $allPlayers */
         $allPlayers = $playerRepository->findBy(array('user' => $user));
         $positionenGroups = array();
 
@@ -174,26 +172,6 @@ class DefaultController extends Controller
         );
 
         return $this->render('AppBundle:Default:lineup-print.pdf.twig', $view);
-    }
-
-    /**
-     * @return Response
-     */
-    public function scoreAction()
-    {
-        $user = $this->get('security.token_storage')->getToken()->getUser();
-        $doctrine = $this->getDoctrine();
-        $scoreRepository = $doctrine->getRepository('AppBundle:Score');
-
-        $scores = array();
-
-        $view = array(
-            'user' => $user,
-            'scores' => $scores,
-            'title' => 'Punkte',
-        );
-
-        return $this->render('AppBundle:Default:score.html.twig', $view);
     }
 
     /**

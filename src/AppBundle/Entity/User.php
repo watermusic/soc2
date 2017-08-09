@@ -5,50 +5,33 @@ namespace AppBundle\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use FOS\UserBundle\Model\User as BaseUser;
-use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as Serializer;
 
-/**
- * @Serializer\ExclusionPolicy("all")
- *
- * @ORM\Entity
- * @ORM\Table(name="soc_user")
- */
 class User extends BaseUser
 {
-    /**
-     * @ORM\Id
-     * @ORM\Column(type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    protected $id;
 
     /**
      * @var Collection|Score[]
-     * @ORM\OneToMany(targetEntity="Score", mappedBy="player")
      */
     protected $scores;
 
     /**
      * @var Collection|Lineup[]
-     * @ORM\OneToMany(targetEntity="Lineup", mappedBy="user")
      */
     protected $lineups;
 
     /**
      * @var Collection|Player[]
-     * @ORM\OneToMany(targetEntity="Player", mappedBy="user")
      */
     protected $players;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="avatar", type="string", length=255)
      */
     protected $avatar = '';
 
-
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->scores = new ArrayCollection();
@@ -203,7 +186,5 @@ class User extends BaseUser
         $this->avatar = $avatar;
         return $this;
     }
-
-
 
 }

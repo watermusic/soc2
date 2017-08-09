@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity repository-class="AppBundle\Entity\PositionRepository" name="AppBundle\Entity\Position" table="soc_position">
+
+        <indexes>
+            <index name="0" columns="name"/>
+        </indexes>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+
+        <field name="name" column="name" length="255"/>
+
+        <field name="shortcut" column="shortcut" length="255"/>
+
+        <field name="colorName" column="color_name" length="255"/>
+
+        <one-to-many field="players" target-entity="AppBundle\Entity\Player" mapped-by="position" orphan-removal="true">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+        </one-to-many>
+
+    </entity>
+
+</doctrine-mapping>

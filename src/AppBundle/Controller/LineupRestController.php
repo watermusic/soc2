@@ -19,9 +19,6 @@ class LineupRestController extends Controller
     /**
      * The service endpoint
      *
-     * @Route("/", name="soc_rest_lineup_endpoint" , options={"expose"=true},)
-     * @Method({"GET"})
-     *
      * @return JsonResponse
      */
     public function indexAction()
@@ -34,9 +31,6 @@ class LineupRestController extends Controller
 
     /**
      * Return the overall user list.
-     *
-     * @Route("/{username}/{id}", name="soc_rest_lineup_get", options={"expose"=true}, requirements={"id" = "\d+"}, defaults={"id" = 1})
-     * @Method({"GET"})
      *
      * @param string $username
      * @param $id
@@ -72,9 +66,6 @@ class LineupRestController extends Controller
 
     /**
      * Return the overall user list.
-     *
-     * @Route("/{username}", name="soc_rest_lineup_post", options={"expose"=true},)
-     * @Method({"POST"})
      *
      * @param string $username
      * @param Request $request
@@ -132,6 +123,29 @@ class LineupRestController extends Controller
         $status = 201;
         $result = $this->get('jms_serializer')->serialize($lineup, 'json');
         return new Response($result, $status, array('Content-Type' => 'application/json'));
+
+    }
+
+
+    /**
+     * Return the overall user list.
+     *
+     * @param string $username
+     * @return Response
+     */
+    public function getUserAction($username)
+    {
+        $userRepository = $this->getDoctrine()->getRepository('AppBundle:User');
+        $user = $userRepository->findOneBy(array('username' => $username));
+
+        if ($user === null) {
+            throw $this->createNotFoundException('User not found.');
+        }
+
+        $data = $this->get('jms_serializer')->serialize($user, 'json');
+        $status = 200;
+
+        return new Response($data, $status, array('Content-Type' => 'application/json'));
 
     }
 

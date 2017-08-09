@@ -2,46 +2,38 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-
 /**
  * Score
  *
- * @ORM\Table(name="soc_score")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\ScoreRepository")
  */
 class Score
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @var User
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="scores")
-     * @ORM\JoinColumn(name="player", referencedColumnName="id")
      **/
-    private $player;
+    protected $player;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="matchday", type="smallint")
      */
-    private $matchday;
+    protected $matchday;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="score", type="integer")
      */
-    private $score;
+    protected $score;
 
+    /**
+     * Score constructor.
+     */
+    public function __construct()
+    {
+    }
 
     /**
      * Get id
@@ -121,4 +113,5 @@ class Score
     {
         return $this->score;
     }
+
 }

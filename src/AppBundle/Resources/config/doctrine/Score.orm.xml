@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity repository-class="AppBundle\Entity\ScoreRepository" name="AppBundle\Entity\Score" table="soc_score">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+
+        <field name="matchday" type="smallint" column="matchday"/>
+
+        <field name="score" type="integer" column="score"/>
+
+        <many-to-one field="player" target-entity="AppBundle\Entity\User" inversed-by="scores">
+            <join-columns>
+                <join-column name="player" nullable="true"/>
+            </join-columns>
+        </many-to-one>
+
+    </entity>
+
+</doctrine-mapping>

@@ -72,6 +72,7 @@ EOT
         $commands = array(
             'soc:player:import',
             'soc:user:import',
+            'soc:matches:sync',
         );
 
         $output = new NullOutput();
@@ -98,6 +99,7 @@ EOT
         $connection->executeQuery('TRUNCATE soc_player');
         $connection->executeQuery('TRUNCATE soc_position');
         $connection->executeQuery('TRUNCATE soc_score');
+        $connection->executeQuery('TRUNCATE soc_matches');
         $connection->executeQuery('TRUNCATE soc_team');
         $connection->executeQuery('TRUNCATE soc_user');
         $connection->executeQuery('SET foreign_key_checks = 1');
@@ -116,11 +118,19 @@ EOT
                 '1',
                 '57',
                 '58',
+                '79',
                 '93',
                 '107',
                 '124',
+                '126',
+                '133',
                 '171',
                 '204',
+                '268',
+                '271',
+                '276',
+                '277',
+                '287',
                 '228',
                 '253',
                 '281',
@@ -129,6 +139,8 @@ EOT
                 '374',
                 '410',
                 '424',
+                '444',
+                '493',
                 '499',
                 '504',
             ),
@@ -143,7 +155,7 @@ EOT
                 '309',
                 '283',
                 '293',
-                '277',
+                '272',
                 '261',
                 '267',
                 '279',
@@ -189,9 +201,14 @@ EOT
         /** @var User $user */
         $user = $userRepository->find(1);
 
-        $data = array(
-            "lineup" => array(1, 57, 58, 93, 228, 253, 281, 292, 297, 499, 504),
-        );
+        $data = [
+            "lineup" => [
+                "Torwart" => [1],
+                "Abwehr" => [79,126,133],
+                "Mittelfeld" => [268,271,276,277,287],
+                "Sturm" => [444,493],
+            ],
+        ];
 
         $lineup = new Lineup();
         $lineup

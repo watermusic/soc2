@@ -2,7 +2,6 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -11,50 +10,36 @@ use JMS\Serializer\Annotation as Serializer;
 /**
  * Position
  *
- * @ORM\Table(name="soc_position",indexes={@ORM\Index(columns={"name"})})
- * @ORM\Entity(repositoryClass="AppBundle\Entity\PositionRepository")
  */
 class Position
 {
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
      * @var Collection|Player[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="position", cascade={"all"}, orphanRemoval=true)
-     *
+
      * @Serializer\Exclude
      */
     protected $players;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="shortcut", type="string", length=255)
      */
     protected $shortcut;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="color_name", type="string", length=255)
      */
     protected $colorName;
-
 
     /**
      * Get id
@@ -64,6 +49,13 @@ class Position
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Position constructor.
+     */
+    public function __construct()
+    {
     }
 
     /**

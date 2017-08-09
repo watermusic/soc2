@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="AppBundle\Entity\Team" exclusion-policy="ALL" xml-root-name="team">
+
+        <property name="id" type="integer" expose="true" />
+
+        <property name="name" type="string" expose="true" />
+
+    </class>
+</serializer>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="FOS\UserBundle\Model\User" exclusion-policy="ALL" xml-root-name="base_user">
+
+        <property name="id" type="integer" expose="true" />
+
+        <property name="username" type="string" expose="true" />
+
+        <property name="email" type="string" expose="true" />
+
+        <property name="enabled" type="boolean" expose="true" />
+
+    </class>
+</serializer>

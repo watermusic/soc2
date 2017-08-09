@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serializer>
+    <class name="AppBundle\Entity\Lineup" exclusion-policy="ALL" xml-root-name="lineup">
+
+        <property name="matchday" type="integer" expose="true" />
+
+        <property name="data" type="array" expose="true" />
+
+    </class>
+</serializer>

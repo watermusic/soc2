@@ -1,0 +1,3 @@
+api_rest:
+    resource: "@AppBundle/Resources/config/routing/rest.yml"
+    prefix:   /rest

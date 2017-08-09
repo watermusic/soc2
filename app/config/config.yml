@@ -76,3 +76,10 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+jms_serializer:
+    metadata:
+        directories:
+            FOSUserBundle:
+                path: "%kernel.root_dir%/Resources/FOSUserBundle/serializer"
+                namespace_prefix: "FOS\\UserBundle"

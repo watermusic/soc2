@@ -1,5 +1,20 @@
+api_rest_lineup_index:
+    path:     /lineup
+    defaults: { _controller: AppBundle:LineupRest:index }
 
-api_rest_lineup:
-    type: annotation
-    prefix: /v1
-    resource: '@AppBundle/Controller/LineupRestController.php'
+api_rest_lineup_get:
+    path:     /lineup/{username}/{id}
+    defaults: { _controller: AppBundle:LineupRest:getLineup, id:1 }
+    methods:  [GET, HEAD]
+    requirements:
+        id: '\d+'
+
+api_rest_lineup_post:
+    path:     /lineup/{username}
+    defaults: { _controller: AppBundle:LineupRest:postLineup }
+    methods:  [POST]
+
+api_rest_user_get:
+    path:     /user/{username}
+    defaults: { _controller: AppBundle:LineupRest:getUser }
+    methods:  [GET, HEAD]

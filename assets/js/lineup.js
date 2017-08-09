@@ -100,7 +100,7 @@ $(function() {
         storage[CONST_STURM] = [];
       },
       save: function() {
-        let uri = Routing.generate('soc_rest_lineup_post', { username: user.username });
+        let uri = Routing.generate('api_rest_lineup_post', { username: user.username });
         let data = {
           matchday: SOC.BenchCtrl.getMatchday(),
           data: {
@@ -110,7 +110,7 @@ $(function() {
         return axios.post(uri, data);
       },
       read: function(num) {
-        let uri = Routing.generate('soc_rest_lineup_get', { username: user.username, id: num });
+        let uri = Routing.generate('api_rest_lineup_get', { username: user.username, id: num });
         return axios.get(uri);
       },
       update: function() {

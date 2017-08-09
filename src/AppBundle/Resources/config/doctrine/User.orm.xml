@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="AppBundle\Entity\User" table="soc_user">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+
+        <field name="avatar" column="avatar" length="255"/>
+
+        <one-to-many field="scores" target-entity="AppBundle\Entity\Score" mapped-by="player"/>
+
+        <one-to-many field="lineups" target-entity="AppBundle\Entity\Lineup" mapped-by="user"/>
+
+        <one-to-many field="players" target-entity="AppBundle\Entity\Player" mapped-by="user"/>
+
+    </entity>
+
+</doctrine-mapping>

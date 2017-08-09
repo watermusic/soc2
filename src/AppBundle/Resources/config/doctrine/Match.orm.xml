@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping"
+                  xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity repository-class="AppBundle\Entity\MatchesRepository" name="AppBundle\Entity\Match" table="soc_matches">
+
+        <indexes>
+            <index name="0" columns="match_day"/>
+        </indexes>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+
+        <field name="kickoffAt" type="datetime" column="kickoff_at"/>
+
+        <field name="createdAt" column="created_at" type="datetime">
+            <gedmo:timestampable on="create"/>
+        </field>
+
+        <field name="updatedAt" column="updated_at" type="datetime">
+            <gedmo:timestampable on="update"/>
+        </field>
+
+        <field name="matchDay" type="integer" column="match_day"/>
+
+        <many-to-one field="homeTeam" target-entity="AppBundle\Entity\Team" inversed-by="homeMatches" fetch="EAGER">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <join-columns>
+                <join-column name="home_team_id"/>
+            </join-columns>
+        </many-to-one>
+
+        <many-to-one field="guestTeam" target-entity="AppBundle\Entity\Team" inversed-by="guestMatches" fetch="EAGER">
+            <cascade>
+                <cascade-all/>
+            </cascade>
+            <join-columns>
+                <join-column name="guest_team_id"/>
+            </join-columns>
+        </many-to-one>
+
+    </entity>
+
+</doctrine-mapping>

@@ -2,60 +2,36 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-use JMS\Serializer\Annotation as Serializer;
-
 /**
  * Team
- *
- * @ORM\Table(name="soc_team",indexes={@ORM\Index(columns={"name"})})
- * @ORM\Entity(repositoryClass="AppBundle\Entity\TeamRepository")
  */
 class Team
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     protected $name;
 
     /**
      * @var Collection|Player[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Player", mappedBy="team", cascade={"all"}, orphanRemoval=true)
-     *
-     * @Serializer\Type("array<AppBundle\Entity\Player>")
-     * @Serializer\Exclude
      */
     protected $players;
 
     /**
      * @var Collection|Match[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Match", mappedBy="homeTeam", cascade={"all"}, orphanRemoval=true)
-     *
-     * @Serializer\Type("array<AppBundle\Entity\Match>")
-     * @Serializer\Exclude
      */
     protected $homeMatches;
 
     /**
      * @var Collection|Match[]
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Match", mappedBy="guestTeam", cascade={"all"}, orphanRemoval=true)
-     *
-     * @Serializer\Type("array<AppBundle\Entity\Match>")
-     * @Serializer\Exclude
      */
     protected $guestMatches;
 

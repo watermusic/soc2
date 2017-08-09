@@ -9,16 +9,11 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
-use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\Constraints\Range;
 
-/**
- * Command that lists the file keys of a filesystem
- *
- * @author Antoine Hérault <antoine.herault@gmail.com>
- */
+
 class MatchesSyncCommand extends ContainerAwareCommand
 {
 
@@ -132,7 +127,8 @@ EOT
     }
 
     /**
-     * @param array $users
+     * @param string
+     * @return Team
      */
     protected function findTeamByExternalName($name)
     {

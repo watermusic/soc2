@@ -2,27 +2,22 @@
 
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
-use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation as Serializer;
+use AppBundle\Doctrine\Traits\Timestampable;
 
 /**
  * Player
- *
- * @ORM\Table(name="soc_matches",indexes={@ORM\Index(columns={"match_day"})})
- * @ORM\Entity(repositoryClass="AppBundle\Entity\MatchesRepository")
  *
  * @Serializer\ExclusionPolicy("all")
  *
  */
 class Match
 {
+
+    use Timestampable;
+
     /**
      * @var int
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      *
      * @Serializer\Expose
      *
@@ -32,16 +27,12 @@ class Match
     /**
      * @var Team
      *
-     * @ORM\ManyToOne(targetEntity="Team", inversedBy="players", cascade={"all"}, fetch="EAGER")
-     *
      * @Serializer\Expose
      */
     protected $homeTeam;
 
     /**
      * @var Team
-     *
-     * @ORM\ManyToOne(targetEntity="Team", inversedBy="players", cascade={"all"}, fetch="EAGER")
      *
      * @Serializer\Expose
      */
@@ -50,39 +41,13 @@ class Match
     /**
      * @var \DateTime
      *
-     * @ORM\Column(type="datetime")
-     *
      * @Serializer\Expose
      *
      */
     protected $kickoffAt;
 
     /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="create")
-     * @ORM\Column(type="datetime")
-     *
-     * @Serializer\Expose
-     *
-     */
-    protected $createdAt;
-
-    /**
-     * @var \DateTime
-     *
-     * @Gedmo\Timestampable(on="update")
-     * @ORM\Column(type="datetime")
-     *
-     * @Serializer\Expose
-     *
-     */
-    protected $updatedAt;
-
-    /**
      * @var int
-     *
-     * @ORM\Column(type="integer")
      *
      * @Serializer\Expose
      */
@@ -186,45 +151,5 @@ class Match
 
         return $this;
     }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @param \DateTime $createdAt
-     * @return $this
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getUpdatedAt()
-    {
-        return $this->updatedAt;
-    }
-
-    /**
-     * @param \DateTime $updatedAt
-     * @return $this
-     */
-    public function setUpdatedAt($updatedAt)
-    {
-        $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-
 
 }

@@ -44,6 +44,7 @@ $(function() {
         return _.without(SOC.LineupStorage.getFlatten(), null).length == 11;
       },
       add: function(position, playerId) {
+
         if(isSpace(position) === false) {
           return -1;
         }

@@ -10,115 +10,23 @@
 
     {% include 'AppBundle:Default:navigation-main.html.twig' %}
 
-    <div id="page-wrapper" class="gray-bg">
+        <div id="page-wrapper" class="gray-bg">
 
-    {% include 'AppBundle:Default:navigation-minor.html.twig' %}
+            {% include 'AppBundle:Default:navigation-minor.html.twig' %}
 
-    {% block content_header %}
+            {% block content_header %}
+                {% include '@App/_header.html.twig' %}
+            {% endblock %}
 
-        <div class="row wrapper border-bottom white-bg page-heading">
-            <div class="col-lg-10">
-                <h2>Dashboard</h2>
-                <ol class="breadcrumb">
-                    <li>
-                        <a href="{{ path('soc_dashboard_index') }}">Home</a>
-                    </li>
-                    <li class="active">
-                        <strong>Dashboard</strong>
-                    </li>
-                </ol>
-            </div>
-            <div class="col-lg-2">
+            {% block content_main %}
+            {% endblock %}
 
-            </div>
-        </div>
-
-    {% endblock %}
-
-    {% block content_main %}
-        <div class="row wrapper wrapper-content animated fadeInRight">
-            <div class="col-lg-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Tabelle</h5>
-                    </div>
-                    <div class="ibox-content">
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Punkte pro Spieltag</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p>
-                            Use any of the available button classes to quickly create a styled button.
-                        </p>
-
-                        <h3 class="font-bold">
-                            Normal buttons
-                        </h3>
-
-                        <p>
-                            <button type="button" class="btn btn-w-m btn-default">Default</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Saisonverlauf</h5>
-                    </div>
-                    <div class="ibox-content">
-                        <p>
-                            Use any of the available button classes to quickly create a styled button.
-                        </p>
-
-                        <h3 class="font-bold">
-                            Normal buttons
-                        </h3>
-
-                        <p>
-                            <button type="button" class="btn btn-w-m btn-default">Default</button>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-6">
-                <div class="ibox float-e-margins">
-                    <div class="ibox-title">
-                        <h5>Bundesliga News</h5>
-
-                        <div class="ibox-tools">
-                            <a class="close-link">
-                                <i class="fa fa-refresh"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div class="ibox-content inspinia-timeline" id="news-timeline">
-
-                    </div>
-                </div>
-            </div>
+            {% block content_footer %}
+                {% include '@App/_footer.html.twig' %}
+            {% endblock %}
 
         </div>
-    {% endblock %}
 
-    {% block content_footer %}
-        <div class="footer">
-            <div class="pull-right">
-                Yeah <strong>iii</strong>.
-            </div>
-            <div>
-                <strong>Copyright</strong> S.O.C. &copy; 2014-2015
-            </div>
-        </div>
-    {% endblock %}
-
-    </div>
     </div>
 
 {% endblock %}

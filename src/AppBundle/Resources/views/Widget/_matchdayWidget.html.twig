@@ -1,0 +1,157 @@
+{% if matches|length > 1 %}
+
+    <style>
+
+        .matches .table>thead>tr>th,
+        .matches .table>thead>tr>td,
+        .matches .table>tbody>tr>th,
+        .matches .table>tbody>tr>td,
+        .matches .table>tfoot>tr>th,
+        .matches .table>tfoot>tr>td {
+            border-top: 0;
+            padding: 0;
+            vertical-align: middle;
+        }
+
+        .matches .match-home,
+        .matches .match-away {
+            text-align: center;
+            line-height: 0;
+            width: 44%;
+        }
+
+        .matches td.match-result {
+            font-size: 10px;
+            min-width: 34px;
+            color: #ccc;
+            text-align: center;
+            line-height: 21px;
+        }
+
+        .matches .club {
+            padding: 12px 8px;
+            display: block;
+            text-decoration: none;
+            color: #151515;
+            position: relative;
+        }
+
+        .matches .table {
+            margin-bottom: 4px;
+        }
+
+        .matches .match-home .club i,
+        .matches .match-away .club i {
+            width: 25px;
+            height: 25px;
+            display: inline-block;
+            position: absolute;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .matches .match-home .club i {
+            right: 8px;
+            top: 0;
+        }
+
+        .matches .match-away .club i {
+            left: 8px;
+            top: 0;
+        }
+        
+        .matches .club i.logo-augsburg {
+            background-image: url(../img/augsburg.svg);
+        }
+        .matches .club i.logo-bayern {
+            background-image: url(../img/bayern.svg);
+        }
+        .matches .club i.logo-bremen {
+            background-image: url(../img/bremen.svg);
+        }
+        .matches .club i.logo-darmstadt {
+            background-image: url(../img/darmstadt.svg);
+        }
+        .matches .club i.logo-dortmund {
+            background-image: url(../img/dortmund.svg);
+        }
+        .matches .club i.logo-frankfurt {
+            background-image: url(../img/frankfurt.svg);
+        }
+        .matches .club i.logo-gladbach {
+            background-image: url(../img/gladbach.svg);
+        }
+        .matches .club i.logo-hamburg {
+            background-image: url(../img/hamburg.svg);
+        }
+        .matches .club i.logo-hannover {
+            background-image: url(../img/hannover.svg);
+        }
+        .matches .club i.logo-hertha {
+            background-image: url(../img/hertha.svg);
+        }
+        .matches .club i.logo-hoffenheim {
+            background-image: url(../img/hoffenheim.svg);
+        }
+        .matches .club i.logo-ingolstadt {
+            background-image: url(../img/ingolstadt.svg);
+        }
+        .matches .club i.logo-köln {
+            background-image: url(../img/köln.svg);
+        }
+        .matches .club i.logo-leverkusen {
+            background-image: url(../img/leverkusen.svg);
+        }
+        .matches .club i.logo-mainz {
+            background-image: url(../img/mainz.svg);
+        }
+        .matches .club i.logo-schalke {
+            background-image: url(../img/schalke.svg);
+        }
+        .matches .club i.logo-stuttgart {
+            background-image: url(../img/stuttgart.svg);
+        }
+        .matches .club i.logo-wolfsburg {
+            background-image: url(../img/wolfsburg.svg);
+        }
+
+        .matches .club i.logo-leipzig {
+            background-image: url(../img/leipzig.svg);
+        }
+
+        .matches .club i.logo-freiburg {
+            background-image: url(../img/freiburg.svg);
+        }
+
+        .panel {
+            margin-top: 20px;
+            margin-bottom: 0;
+        }
+
+    </style>
+
+    <div class="row">
+
+        {% for row in matches|batch(3, {'id': '', 'name': ''}) %}
+
+                <div class="col-md-4"><div class="panel matches">
+
+                    {% for match in row %}
+                        {% include '@App/Widget/_matchdayWidgetMatch.html.twig' with {'match' : match} %}
+                    {% endfor %}
+
+                </div></div>
+
+        {% endfor %}
+
+        <div class="col-lg-4">
+
+        </div>
+
+        <div class="col-lg-4">
+
+        </div>
+
+    </div>
+{% endif %}

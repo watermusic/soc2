@@ -6,24 +6,7 @@
 {% endblock %}
 
 {% block content_header %}
-
-    <div class="row wrapper border-bottom white-bg page-heading">
-        <div class="col-lg-10">
-            <h2>Dashboard</h2>
-            <ol class="breadcrumb">
-                <li>
-                    <a href="{{ path('soc_dashboard_index') }}">Home</a>
-                </li>
-                <li class="active">
-                    <strong>Dashboard</strong>
-                </li>
-            </ol>
-        </div>
-        <div class="col-lg-2">
-
-        </div>
-    </div>
-
+    {% include '@App/_header.html.twig' with {'name' : 'Dashboard'} %}
 {% endblock %}
 
 {% block content_main %}
@@ -98,14 +81,14 @@
     </div>
 {% endblock %}
 
-    {% block content_footer %}
-        {{ parent() }}
-        <div id="config"
-             data-user="{{ user ? user|serialize|e('html_attr') : '' }}"
-             data-chart-data="{{ ppd.data|raw|e('html_attr') }}"
-             data-matchdays="{{ ppd.labels|raw|e('html_attr') }}"
-        ></div>
-    {% endblock %}
+{% block content_footer %}
+    {{ parent() }}
+    <div id="config"
+         data-user="{{ user ? user|serialize|e('html_attr') : '' }}"
+         data-chart-data="{{ ppd.data|raw|e('html_attr') }}"
+         data-matchdays="{{ ppd.labels|raw|e('html_attr') }}"
+    ></div>
+{% endblock %}
 
 {% block javascripts %}
     {{ parent() }}
@@ -114,6 +97,7 @@
 
     <script id="news-timeline-item" type="x-tmpl-mustache">
     {{ news.template|raw }}
+
     </script>
 
 {% endblock %}

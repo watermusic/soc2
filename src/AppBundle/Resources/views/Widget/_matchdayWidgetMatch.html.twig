@@ -1,0 +1,29 @@
+{#
+  Theme MatchDay Match Widget
+
+  Available variables:
+  {
+    'match' : {},
+  }
+#}
+<div id="match_{{ match.id }}">
+    <table class="table table-hover">
+        <tbody>
+        <tr>
+            <td class="match-home">
+                <div class="club">
+                    <i class="logo-{{ match.homeTeam.name|lower }}"></i>
+                    <span class="visible-lg-inline">{{ match.homeTeam.name }}</span>
+                </div>
+            </td>
+            <td class="match-result">:</td>
+            <td class="match-away">
+                <div class="club">
+                    <i class="logo-{{ match.guestTeam.name|lower }}"></i>
+                    <span class="visible-lg-inline">{{ match.guestTeam.name }}</span>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

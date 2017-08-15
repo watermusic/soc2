@@ -18,7 +18,7 @@ class AppKernel extends Kernel
             new AppBundle\AppBundle(),
 
             new JMS\SerializerBundle\JMSSerializerBundle(),
-            new Ps\PdfBundle\PsPdfBundle(),
+            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
 
             new FOS\UserBundle\FOSUserBundle(),

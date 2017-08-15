@@ -12,9 +12,9 @@ soc_lineup_index:
 
 soc_lineup_print:
     path:     /lineup/{matchday}/print.{_format}
-    defaults: { _controller: AppBundle:Default:lineupPrint, _format: pdf }
+    defaults: { _controller: AppBundle:Default:lineupPrint }
     requirements:
-        _format: pdf
+        _format: html|pdf
 
 soc_team_index:
     path:     /team

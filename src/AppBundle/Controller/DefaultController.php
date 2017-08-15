@@ -7,6 +7,7 @@ use AppBundle\Entity\Score;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Ps\PdfBundle\Annotation\Pdf;
 
 class DefaultController extends Controller
 {
@@ -135,7 +136,7 @@ class DefaultController extends Controller
      * @param int $matchday
      * @return Response
      */
-    public function lineupPrintAction($matchday)
+    public function lineupPrintAction($matchday, $_format)
     {
         $doctrine = $this->getDoctrine();
         $userRepository = $doctrine->getRepository('AppBundle:User');
@@ -174,7 +175,20 @@ class DefaultController extends Controller
             'matchday' => $matchday,
         );
 
-        return $this->render('AppBundle:Default:lineup-print.pdf.twig', $view);
+        $html = $this->renderView('AppBundle:Default:lineup-print.html.twig', $view);
+
+        if($_format === "html") {
+            return new Response($html);
+        }
+
+        return new Response(
+            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, ['orientation' => 'Landscape', 'zoom' => 5.0]),
+            200,
+            array(
+                'Content-Type'          => 'application/pdf',
+                'Content-Disposition'   => sprintf('attachment; filename="lineup_%02d.pdf"', $matchday)
+            )
+        );
     }
 
     /**

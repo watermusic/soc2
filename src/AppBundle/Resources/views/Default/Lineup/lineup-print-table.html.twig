@@ -1,16 +1,34 @@
-<table class="player table table-striped">
-    <tr>
-        <td class="col-header" colspan="2"><h3 class="username">{{ username|title }}</h3></td>
-        <td class="col-header"><img src="{{ pdf_image('AppBundle:lu-award.png') }}" width="5mm"/></td> {# Elf des Tages #}
-        <td class="col-header"><img src="{{ pdf_image('AppBundle:lu-note.png') }}" width="5mm"/></td> {# Note #}
-        <td class="col-header"><img src="{{ pdf_image('AppBundle:lu-assist.png') }}" width="5mm"/></td> {# Assists #}
-        <td class="col-header"><img src="{{ pdf_image('AppBundle:lu-goal.png') }}" width="5mm"/></td> {# Tor #}
-        <td class="col-header"><img src="{{ pdf_image('AppBundle:lu-goal-against.png') }}" width="5mm"/></td> {# Gegentor #}
-        <td class="col-header"><img src="{{ pdf_image('AppBundle:lu-cards.png') }}" width="5mm"/></td> {# Rot/Gelb-Rot #}
-        <td class="col-header"><img src="{{ pdf_image('AppBundle:lu-startlineup.png') }}" width="5mm"/></td> {# Auf dem Platz #}
+<table class="player table">
+    <tr class="col-header">
+        <td colspan="2">
+            <h3 class="username">{{ username|title }}</h3>
+        </td>
+        <td >
+            <img src="{{ asset('bundles/app/images/lu-award.png') }}" style="width: 20px; height: 20px;"/>
+        </td> {# Elf des Tages #}
+        <td>
+            <img src="{{ asset('bundles/app/images/lu-note.png') }}" style="width: 20px; height: 20px;"/>
+        </td> {# Note #}
+        <td>
+            <img src="{{ asset('bundles/app/images/lu-assist.png') }}" style="width: 20px; height: 20px;"/>
+        </td> {# Assists #}
+        <td>
+            <img src="{{ asset('bundles/app/images/lu-goal.png') }}" style="width: 20px; height: 20px;"/>
+        </td> {# Tor #}
+        <td>
+            <img src="{{ asset('bundles/app/images/lu-goal-against.png') }}" style="width: 20px; height: 20px;"/>
+        </td> {# Gegentor #}
+        <td>
+            <img src="{{ asset('bundles/app/images/lu-cards.png') }}" style="width: 20px; height: 20px;"/>
+        </td> {# Rot/Gelb-Rot #}
+        <td>
+            <img src="{{ asset('bundles/app/images/lu-startlineup.png') }}" style="width: 20px; height: 20px;"/>
+        </td> {# Auf dem Platz #}
     </tr>
-    {% for player in lineup.players %}
+    {#{% for player in lineup.players %}#}
+    {% for i in 0..10 %}
         {% set class = (loop.index <= 4 or loop.index >= 10) ? 'bg-light' : '' %}
+        {% set player = lineup.players[i]|default({'name':'', 'team':{'name':''}}) %}
         <tr class="{{ class }}">
             <td class="{{ player.team.name }}">{{ loop.index }}</td>
             <td class="player-name">{{ player.name }}</td>
@@ -24,8 +42,8 @@
         </tr>
     {% endfor %}
     {% if lineup['lineup'] is defined %}
-        <tr class="tb-footer">
-            <td colspan="9">{{ lineup['lineup'].updated|date("d.m.Y / H:i:s") }}</td>
-        </tr>
+        {#<tr class="tb-footer">#}
+            {#<td colspan="9">{{ lineup['lineup'].updatedAt|date("d.m.Y / H:i:s") }}</td>#}
+        {#</tr>#}
     {% endif %}
 </table>

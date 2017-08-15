@@ -83,3 +83,14 @@ jms_serializer:
             FOSUserBundle:
                 path: "%kernel.root_dir%/Resources/FOSUserBundle/serializer"
                 namespace_prefix: "FOS\\UserBundle"
+
+knp_snappy:
+    pdf:
+        enabled:    true
+        binary:     '%wkhtml_path%/wkhtmltopdf'
+        options:    []
+    image:
+        enabled:    true
+        binary:     '%wkhtml_path%/wkhtmltoimage'
+        options:    []
+    temporary_folder: %kernel.cache_dir%/snappy

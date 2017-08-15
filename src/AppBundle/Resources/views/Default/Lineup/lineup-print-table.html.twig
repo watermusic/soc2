@@ -1,54 +1,148 @@
-<table class="table table-striped">
-    <thead>
-        <tr class="col-header">
-            <td colspan="2" class="username">
-                <span>{{ username|title }}</span>
-            </td>
-            <td >
-                <img src="{{ asset('bundles/app/images/lu-award.png') }}" style="width: 20px; height: 20px;"/>
-            </td> {# Elf des Tages #}
-            <td>
-                <img src="{{ asset('bundles/app/images/lu-note.png') }}" style="width: 20px; height: 20px;"/>
-            </td> {# Note #}
-            <td>
-                <img src="{{ asset('bundles/app/images/lu-assist.png') }}" style="width: 20px; height: 20px;"/>
-            </td> {# Assists #}
-            <td>
-                <img src="{{ asset('bundles/app/images/lu-goal.png') }}" style="width: 20px; height: 20px;"/>
-            </td> {# Tor #}
-            <td>
-                <img src="{{ asset('bundles/app/images/lu-goal-against.png') }}" style="width: 20px; height: 20px;"/>
-            </td> {# Gegentor #}
-            <td>
-                <img src="{{ asset('bundles/app/images/lu-cards.png') }}" style="width: 20px; height: 20px;"/>
-            </td> {# Rot/Gelb-Rot #}
-            <td>
-                <img src="{{ asset('bundles/app/images/lu-startlineup.png') }}" style="width: 20px; height: 20px;"/>
-            </td> {# Auf dem Platz #}
-        </tr>
-    </thead>
-    <tbody>
-    {#{% for player in lineup.players %}#}
-    {% for i in 0..10 %}
-        {% set player = lineup.players[i]|default({'name':'', 'team':{'name':''}}) %}
-        <tr>
-            <td class="{{ player.team.name|lower }}"><span class="num">{{ loop.index }}</span></td>
-            <td class="player-name">{{ player.name }}</td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-        </tr>
-    {% endfor %}
-    </tbody>
-    {% if lineup['lineup'] is defined %}
-        <tfoot>
-        {#<tr class="tb-footer">#}
-            {#<td colspan="9">{{ lineup['lineup'].updatedAt|date("d.m.Y / H:i:s") }}</td>#}
-        {#</tr>#}
-        </tfoot>
-    {% endif %}
-</table>
+<style>
+
+    .dTable{
+        display: table;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    .dTableRow {
+        display: table-row;
+    }
+    .dTableHeading {
+        display: table-header-group;
+    }
+
+    .player-name {
+        width: 28%;
+    }
+
+    .dTableCell, .dTableHead {
+        display: table-cell;
+        width: 9%;
+        padding: 9px 10px;
+        text-align: center;
+    }
+
+    .dTableCell {
+        border-right: 1px dashed #999999;
+    }
+
+    .dTableCell:first-child {
+        background-size: 50%;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-position: 2px 4px;
+    }
+
+    .dTableHeading {
+        display: table-header-group;
+    }
+    .dTableFoot {
+        background-color: #EEE;
+        display: table-footer-group;
+    }
+    .dTableBody {
+        display: table-row-group;
+    }
+
+    .dTableStriped > .dTableBody > .dTableRow:nth-of-type(odd) {
+        background-color: #D9D9D9;
+    }
+
+    .dTableCell .num {
+        display: block;
+        background-color: white;
+        opacity: 0.75;
+        padding: 8px 2px 8px 15px;
+    }
+
+    .dTableCell.augsburg {
+        background-image: url(/bundles/app/img/augsburg.svg);
+    }
+    .dTableCell.bayern {
+        background-image: url(/bundles/app/img/bayern.svg);
+    }
+    .dTableCell.bremen {
+        background-image: url(/bundles/app/img/bremen.svg);
+    }
+    .dTableCell.darmstadt {
+        background-image: url(/bundles/app/img/darmstadt.svg);
+    }
+    .dTableCell.dortmund {
+        background-image: url(/bundles/app/img/dortmund.svg);
+    }
+    .dTableCell.frankfurt {
+        background-image: url(/bundles/app/img/frankfurt.svg);
+    }
+    .dTableCell.gladbach {
+        background-image: url(/bundles/app/img/gladbach.svg);
+    }
+    .dTableCell.hamburg {
+        background-image: url(/bundles/app/img/hamburg.svg);
+    }
+    .dTableCell.hannover {
+        background-image: url(/bundles/app/img/hannover.svg);
+    }
+    .dTableCell.hertha {
+        background-image: url(/bundles/app/img/hertha.svg);
+    }
+    .dTableCell.hoffenheim {
+        background-image: url(/bundles/app/img/hoffenheim.svg);
+    }
+    .dTableCell.ingolstadt {
+        background-image: url(/bundles/app/img/ingolstadt.svg);
+    }
+    .dTableCell.köln {
+        background-image: url(/bundles/app/img/köln.svg);
+    }
+    .dTableCell.leverkusen {
+        background-image: url(/bundles/app/img/leverkusen.svg);
+    }
+    .dTableCell.mainz {
+        background-image: url(/bundles/app/img/mainz.svg);
+    }
+    .dTableCell.schalke {
+        background-image: url(/bundles/app/img/schalke.svg);
+    }
+    .dTableCell.stuttgart {
+        background-image: url(/bundles/app/img/stuttgart.svg);
+    }
+    .dTableCell.wolfsburg {
+        background-image: url(/bundles/app/img/wolfsburg.svg);
+    }
+
+</style>
+
+<div class="dTable dTableStriped">
+    <div class="dTableHeading">
+        <div class="dTableRow">
+            <div class="dTableHead">&nbsp;</div>
+            <div class="dTableHead username"><span>{{ username|title }}</span></div>
+            <div class="dTableHead"><img src="{{ asset('bundles/app/images/lu-award.png') }}" style="width: 20px; height: 20px;"/></div>
+            <div class="dTableHead"><img src="{{ asset('bundles/app/images/lu-note.png') }}" style="width: 20px; height: 20px;"/></div>
+            <div class="dTableHead"><img src="{{ asset('bundles/app/images/lu-assist.png') }}" style="width: 20px; height: 20px;"/></div>
+            <div class="dTableHead"><img src="{{ asset('bundles/app/images/lu-goal.png') }}" style="width: 20px; height: 20px;"/></div>
+            <div class="dTableHead"><img src="{{ asset('bundles/app/images/lu-goal-against.png') }}" style="width: 20px; height: 20px;"/></div>
+            <div class="dTableHead"><img src="{{ asset('bundles/app/images/lu-cards.png') }}" style="width: 20px; height: 20px;"/></div>
+            <div class="dTableHead"><img src="{{ asset('bundles/app/images/lu-startlineup.png') }}" style="width: 20px; height: 20px;"/></div>
+        </div>
+    </div>
+    <div class="dTableBody">
+            {% for i in 0..10 %}
+                {% set player = lineup.players[i]|default({'name':'', 'team':{'name':''}}) %}
+                <div class="dTableRow">
+                    <div class="dTableCell {{ player.team.name|lower }}"><span class="num">{{ loop.index }}</span></div>
+                    <div class="dTableCell player-name">{{ player.name }}</div>
+                    <div class="dTableCell">&nbsp;</div>
+                    <div class="dTableCell">&nbsp;</div>
+                    <div class="dTableCell">&nbsp;</div>
+                    <div class="dTableCell">&nbsp;</div>
+                    <div class="dTableCell">&nbsp;</div>
+                    <div class="dTableCell">&nbsp;</div>
+                    <div class="dTableCell">&nbsp;</div>
+                </div>
+
+            {% endfor %}
+
+    </div>
+</div>

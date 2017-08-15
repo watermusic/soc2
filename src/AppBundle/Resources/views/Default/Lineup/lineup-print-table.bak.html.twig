@@ -1,0 +1,54 @@
+<table class="table table-striped">
+    <thead>
+        <tr class="col-header">
+            <td colspan="2" class="username">
+                <span>{{ username|title }}</span>
+            </td>
+            <td >
+                <img src="{{ asset('bundles/app/images/lu-award.png') }}" style="width: 20px; height: 20px;"/>
+            </td> {# Elf des Tages #}
+            <td>
+                <img src="{{ asset('bundles/app/images/lu-note.png') }}" style="width: 20px; height: 20px;"/>
+            </td> {# Note #}
+            <td>
+                <img src="{{ asset('bundles/app/images/lu-assist.png') }}" style="width: 20px; height: 20px;"/>
+            </td> {# Assists #}
+            <td>
+                <img src="{{ asset('bundles/app/images/lu-goal.png') }}" style="width: 20px; height: 20px;"/>
+            </td> {# Tor #}
+            <td>
+                <img src="{{ asset('bundles/app/images/lu-goal-against.png') }}" style="width: 20px; height: 20px;"/>
+            </td> {# Gegentor #}
+            <td>
+                <img src="{{ asset('bundles/app/images/lu-cards.png') }}" style="width: 20px; height: 20px;"/>
+            </td> {# Rot/Gelb-Rot #}
+            <td>
+                <img src="{{ asset('bundles/app/images/lu-startlineup.png') }}" style="width: 20px; height: 20px;"/>
+            </td> {# Auf dem Platz #}
+        </tr>
+    </thead>
+    <tbody>
+    {#{% for player in lineup.players %}#}
+    {% for i in 0..10 %}
+        {% set player = lineup.players[i]|default({'name':'', 'team':{'name':''}}) %}
+        <tr>
+            <td class="{{ player.team.name|lower }}"><span class="num">{{ loop.index }}</span></td>
+            <td class="player-name">{{ player.name }}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+    {% if lineup['lineup'] is defined %}
+        <tfoot>
+        {#<tr class="tb-footer">#}
+            {#<td colspan="9">{{ lineup['lineup'].updatedAt|date("d.m.Y / H:i:s") }}</td>#}
+        {#</tr>#}
+        </tfoot>
+    {% endif %}
+</table>

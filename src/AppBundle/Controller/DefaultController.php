@@ -185,7 +185,7 @@ class DefaultController extends Controller
         $url = $this->generateUrl('soc_lineup_print', ['matchday' => $matchday, '_format' => 'html'], UrlGeneratorInterface::ABSOLUTE_URL);
 
         return new Response(
-            $this->get('knp_snappy.pdf')->getOutput($url, ['orientation' => 'Landscape', 'zoom' => 5.0]),
+            $this->get('knp_snappy.pdf')->getOutput($url, ['orientation' => 'Landscape', 'B' => 0, 'L' => 0, 'R' => 0, 'T' => 0]),
             200,
             array(
                 'Content-Type'          => 'application/pdf',

@@ -172,7 +172,7 @@ class DefaultController extends Controller
         }
 
         $view = array(
-            'title' => 'Aufstellung ausdrucken',
+            'title' => sprintf('%s. Spieltag ausdrucken', $matchday),
             'lineups' => $lineups,
             'matchday' => $matchday,
         );
@@ -191,7 +191,8 @@ class DefaultController extends Controller
                 'margin-left' => 0,
                 'margin-right' => 0,
                 'margin-top' => 0,
-                ]),
+                ]
+            ),
             200,
             [
                 'Content-Type'          => 'application/pdf',

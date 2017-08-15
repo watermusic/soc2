@@ -8,6 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Ps\PdfBundle\Annotation\Pdf;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultController extends Controller
 {
@@ -134,6 +135,7 @@ class DefaultController extends Controller
 
     /**
      * @param int $matchday
+     * @param string $_format
      * @return Response
      */
     public function lineupPrintAction($matchday, $_format)
@@ -175,14 +177,15 @@ class DefaultController extends Controller
             'matchday' => $matchday,
         );
 
-        $html = $this->renderView('AppBundle:Default:lineup-print.html.twig', $view);
 
         if($_format === "html") {
-            return new Response($html);
+            return $this->render('AppBundle:Default:lineup-print.html.twig', $view);
         }
 
+        $url = $this->generateUrl('soc_lineup_print', ['matchday' => $matchday, '_format' => 'html'], UrlGeneratorInterface::ABSOLUTE_URL);
+
         return new Response(
-            $this->get('knp_snappy.pdf')->getOutputFromHtml($html, ['orientation' => 'Landscape', 'zoom' => 5.0]),
+            $this->get('knp_snappy.pdf')->getOutput($url, ['orientation' => 'Landscape', 'zoom' => 5.0]),
             200,
             array(
                 'Content-Type'          => 'application/pdf',

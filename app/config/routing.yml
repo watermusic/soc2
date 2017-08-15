@@ -10,6 +10,12 @@ soc:
     options:
         expose: true
 
+soc_lineup_print:
+    path:     /export/lineup/{matchday}/print.{_format}
+    defaults: { _controller: AppBundle:Default:lineupPrint }
+    requirements:
+        _format: html|pdf
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 

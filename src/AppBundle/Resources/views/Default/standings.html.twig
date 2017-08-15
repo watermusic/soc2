@@ -1,0 +1,82 @@
+{% extends 'AppBundle::layout.html.twig' %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block stylesheets %}
+
+    {{ parent() }}
+
+    <style>
+
+    </style>
+
+{% endblock %}
+
+{% block body %}
+
+    <div id="wrapper">
+
+        {% include 'AppBundle:Default:navigation-main.html.twig' %}
+
+        <div id="page-wrapper" class="gray-bg">
+
+            {% include 'AppBundle:Default:navigation-minor.html.twig' %}
+
+            {% block content_header %}
+                {% include '@App/_header.html.twig' with {'name' : 'Übersicht'} %}
+            {% endblock %}
+
+            {% block content_main %}
+                <div class="row wrapper wrapper-content animated fadeInRight">
+                    {% for gamer in users %}
+                    <div class="col-lg-4">
+                        <div class="ibox">
+                            <div class="ibox-title">
+                                <h5>{{ gamer.username|title }}</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>Anzahl</th>
+                                            <th>Geld ausgegeben</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% set size = 0 %}
+                                    {% set amount = 0 %}
+                                    {% for positionName, position  in gamer.players %}
+                                        {% set size = size + position.size %}
+                                        {% set amount = amount + position.amount %}
+                                        <tr>
+                                            <td>{{ positionName }}</td>
+                                            <td>{{ position.size }}</td>
+                                            <td>{{ position.amount|number_format }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td></td>
+                                            <td>{{ size }} <small>({{ (22 - size) }})</small></td>
+                                            <td>{{ amount|number_format }} <small>({{ (60000000 - amount)|number_format }})</small></td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            {% endblock %}
+
+        </div>
+    </div>
+
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

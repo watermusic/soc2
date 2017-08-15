@@ -4,10 +4,10 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Player;
 use AppBundle\Entity\Score;
+use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
-use Ps\PdfBundle\Annotation\Pdf;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultController extends Controller
@@ -41,7 +41,7 @@ class DefaultController extends Controller
         }
         arsort($standings);
 
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
 
         $view = array(
             'title' => 'Dashboard',
@@ -89,13 +89,52 @@ class DefaultController extends Controller
         return new JsonResponse($data);
     }
 
+    public function standingsAction()
+    {
+        /** @var User $baseUser */
+        $baseUser = $this->getUser();
+
+        $doctrine = $this->getDoctrine();
+        $userRepository = $doctrine->getRepository('AppBundle:User');
+
+        $gamers = $userRepository->findAll();
+
+        $users = [];
+        foreach ($gamers as $gamer) {
+
+            $user = [
+                'username' => $gamer->getUsername(),
+                'players' => [
+                    'Torwart' => ['size' => 0, 'amount' => 0.0],
+                    'Abwehr' => ['size' => 0, 'amount' => 0.0],
+                    'Mittelfeld' => ['size' => 0, 'amount' => 0.0],
+                    'Sturm' => ['size' => 0, 'amount' => 0.0],
+                ]
+            ];
+
+            foreach ($gamer->getPlayer() as $player) {
+                /** @var Player $player */
+                $user['players'][$player->getPosition()->getName()]['size'] += 1;
+                $user['players'][$player->getPosition()->getName()]['amount'] += $player->getEkPreis();
+            }
+            
+            array_push($users, $user);
+        }
+
+        return $this->render('@App/Default/standings.html.twig', [
+            'title' => 'Übersicht',
+            'users' => $users,
+            'user' => $baseUser,
+        ]);
+    }
+
     /**
      * @return Response
      */
     public function lineupAction()
     {
 
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         $doctrine = $this->getDoctrine();
         $teamRepository = $doctrine->getRepository('AppBundle:Team');
         $playerRepository = $doctrine->getRepository('AppBundle:Player');
@@ -207,7 +246,7 @@ class DefaultController extends Controller
     public function teamAction()
     {
 
-        $user = $this->get('security.token_storage')->getToken()->getUser();
+        $user = $this->getUser();
         $doctrine = $this->getDoctrine();
         $playerRepository = $doctrine->getRepository('AppBundle:Player');
 
@@ -240,53 +279,5 @@ class DefaultController extends Controller
 
         return $this->render('AppBundle:Default:team.html.twig', $view);
     }
-
-    /**
-     * @return Response
-     */
-    public function testAction()
-    {
-
-        $doctrine = $this->getDoctrine();
-        $userRepository = $doctrine->getRepository('AppBundle:User');
-        $playerRepository = $doctrine->getRepository('AppBundle:Player');
-        $lineupRepository = $doctrine->getRepository('AppBundle:Lineup');
-
-        $users = $userRepository->findAll();
-
-        $lineups = array();
-        $matchday = 1;
-
-        foreach ($users as $user) {
-            $lineups[$user->getUsername()] = array();
-            $lineup = $lineupRepository->findOneBy(array('user' => $user, 'matchday' => $matchday));
-
-            $lineups[$user->getUsername()]['players'] = array();
-
-            if($lineup === null) {
-                continue;
-            }
-
-            $lineups[$user->getUsername()]['lineup'] = $lineup;
-            $data = $lineup->getData();
-
-            foreach ($data["lineup"] as $position) {
-                foreach ($position as $name => $playerId ) {
-                    $player = $playerRepository->find($playerId);
-                    array_push($lineups[$user->getUsername()]['players'], $player);
-                }
-            }
-
-        }
-
-        $view = array(
-            'title' => 'Aufstellung ausdrucken',
-            'lineups' => $lineups,
-            'matchday' => $matchday,
-        );
-
-        return $this->render('AppBundle:Default:lineup-print.pdf.twig', $view);
-    }
-
 
 }

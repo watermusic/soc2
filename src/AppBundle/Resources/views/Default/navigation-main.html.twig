@@ -34,9 +34,11 @@
                 <a href="{{ path('soc_team_index') }}"><i class="fa fa-users"></i> <span
                             class="nav-label">Mein Team</span></a>
             </li>
-            {#<li {% if app.request.get('_route') == 'soc_score_index' %} class="active"{% endif %}>#}
-                {#<a href="{{ path('soc_score_index') }}"><i class="fa fa-list-ol"></i> <span class="nav-label">Punkte</span></a>#}
-            {#</li>#}
+            {% if is_granted('ROLE_ADMIN') %}
+            <li {% if app.request.get('_route') == 'soc_standings_standings' %} class="active"{% endif %}>
+                <a href="{{ path('soc_standings_standings') }}"><i class="fa fa-list-ol"></i> <span class="nav-label">Übersicht</span></a>
+            </li>
+            {% endif %}
             {#<li {% if app.request.get('_route') == 'soc_matchday_index' %} class="active"{% endif %}>#}
             {#<a href="{{ path('soc_matchday_index') }}"><i class="fa fa-table"></i> <span class="nav-label">Punkte pro Spieltag</span></a>#}
             {#</li>#}

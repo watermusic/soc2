@@ -14,9 +14,9 @@ soc_team_index:
     path:     /team
     defaults: { _controller: AppBundle:Default:team }
 
-soc_standings_index:
+soc_standings_standings:
     path:     /standings
-    defaults: { _controller: AppBundle:Default:index }
+    defaults: { _controller: AppBundle:Default:standings }
 
 soc_matchday_index:
     path:     /matchday

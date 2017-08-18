@@ -3,7 +3,6 @@
     .dTable{
         display: table;
         width: 100%;
-        margin-bottom: 20px;
     }
     .dTableRow {
         display: table-row;
@@ -111,6 +110,15 @@
         background-image: url(/bundles/app/img/wolfsburg.svg);
     }
 
+    .dTableFoot .dTableCell {
+        font-size: 10px;
+        padding: 2px;
+    }
+
+    .date {
+        text-align: right;
+    }
+
 </style>
 
 <div class="dTable dTableStriped">
@@ -141,8 +149,12 @@
                     <div class="dTableCell">&nbsp;</div>
                     <div class="dTableCell">&nbsp;</div>
                 </div>
-
             {% endfor %}
-
     </div>
+</div>
+<div class="date">
+    {% if lineup.lineup %}
+        <i>{{ lineup.lineup.updatedAt|date('d.m.Y h:i') }}</i>
+    {% endif %}
+    &nbsp;
 </div>

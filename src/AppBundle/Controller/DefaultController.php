@@ -193,14 +193,13 @@ class DefaultController extends Controller
             $lineup = $lineupRepository->findOneBy(array('user' => $user, 'matchday' => $matchday));
 
             $lineups[$user->getUsername()]['players'] = array();
+            $lineups[$user->getUsername()]['lineup'] = $lineup;
 
             if($lineup === null) {
                 continue;
             }
 
-            $lineups[$user->getUsername()]['lineup'] = $lineup;
             $data = $lineup->getData();
-
             foreach ($data["lineup"] as $position) {
                 foreach ($position as $name => $playerId ) {
                     $player = $playerRepository->find($playerId);

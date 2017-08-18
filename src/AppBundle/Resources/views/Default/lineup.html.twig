@@ -203,6 +203,7 @@
 {% block javascripts %}
     {{ parent() }}
 
+    <script src="//cdn.jsdelivr.net/bluebird/3.5.0/bluebird.min.js"></script>
     <script src="{{ asset('build/lineup.js') }}"></script>
 
     <script id="lineup-item" type="x-tmpl-mustache">

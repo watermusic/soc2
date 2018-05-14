@@ -32,6 +32,11 @@ class MatchesRepository extends EntityRepository
             ->getQuery()
             ->getOneOrNullResult()
         ;
+
+        if($match === null) {
+            return 34;
+        }    
+
         return $match->getMatchDay();
     }
 
